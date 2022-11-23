@@ -1,6 +1,10 @@
 package com.dotmario.toonation.Donation;
 
+import com.dotmario.toonation.networking.ModMessages;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.minecraft.network.PacketByteBuf;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -30,6 +34,7 @@ public class DonationCheck extends Thread {
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div[class='alert-layout animated fadeIn v-enter-to']")));
             WebElement element = driver.findElement(By.xpath("/html/body/div/div[2]/div/div/div/div[2]/div[1]/div/span[4]"));
             int donationAmount = Integer.parseInt(element.getText().replaceAll(",", ""));
+            ClientPlayNetworking.send(ModMessages.AMOUNT_ID, (PacketByteBuf) PacketByteBufs.create().writeByte(donationAmount));
             wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div[class='alert-layout animated fadeIn v-enter-to']")));
         }
     }
