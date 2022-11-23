@@ -1,8 +1,7 @@
 package com.dotmario.toonation;
 
-import com.dotmario.toonation.config.MidnightConfigExample;
+import com.dotmario.toonation.config.ModConfigs;
 import com.dotmario.toonation.networking.ModMessages;
-import eu.midnightdust.lib.config.MidnightConfig;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.LoggerFactory;
 
@@ -17,8 +16,7 @@ public class ToonationMod implements ModInitializer {
     @Override
     public void onInitialize() {
         LOGGER.info("Hello Fabric world!");
-//        ModConfigs.registerConfigs();
-        MidnightConfig.init(MOD_ID, MidnightConfigExample.class);
+        ModConfigs.registerConfigs();
 
         ModMessages.registerC2SPackets();
     }
