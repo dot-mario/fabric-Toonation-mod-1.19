@@ -22,7 +22,7 @@
       "com.dotmario.toonation.ToonationMod"
     ],
     "modmenu": [
-      "com.dotmario.toonation.config.ModMenuIntegration"
+      "com.dotmario.toonation.config.MidnightConfigExample"
     ],
     "client": [
       "com.dotmario.toonation.ToonationModClient"
