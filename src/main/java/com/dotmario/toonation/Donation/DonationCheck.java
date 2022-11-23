@@ -1,5 +1,6 @@
 package com.dotmario.toonation.Donation;
 
+import com.dotmario.toonation.config.MidnightConfigExample;
 import com.dotmario.toonation.networking.ModMessages;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -29,7 +30,7 @@ public class DonationCheck extends Thread {
         WebDriver driver = new ChromeDriver(options);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(Integer.MAX_VALUE));
 
-        driver.get("https://toon.at/widget/alertbox/f74be28c7a9ee311f222abf8d9f553a4");
+        driver.get(MidnightConfigExample.toonationURL);
         while (isAllowed) {
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div[class='alert-layout animated fadeIn v-enter-to']")));
             WebElement element = driver.findElement(By.xpath("/html/body/div/div[2]/div/div/div/div[2]/div[1]/div/span[4]"));

@@ -22,13 +22,10 @@
       "com.dotmario.toonation.ToonationMod"
     ],
     "modmenu": [
-      "com.dotmario.toonation.config.MidnightConfigExample"
+      "com.dotmario.toonation.config.ModMenuIntegration"
     ],
     "client": [
       "com.dotmario.toonation.ToonationModClient"
-    ],
-    "server": [
-      "com.dotmario.toonation.ToonationModServer"
     ]
   },
   "mixins": [
