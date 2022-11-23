@@ -5,7 +5,7 @@ import net.fabricmc.api.ModInitializer;
 import org.slf4j.LoggerFactory;
 
 import java.util.logging.Logger;
-
+// Very important comment
 public class ToonationMod implements ModInitializer {
 
     public static final String MOD_ID = "toonation";
