@@ -16,6 +16,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
+import static com.dotmario.toonation.ToonationMod.LOGGER;
+
 public class DonationCheck extends Thread {
     private boolean isAllowed;
 
@@ -25,18 +27,20 @@ public class DonationCheck extends Thread {
     }
     @Override
     public void run() {
-        ChromeOptions options = new ChromeOptions();
-        options.setHeadless(true);
-        WebDriver driver = new ChromeDriver(options);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(Integer.MAX_VALUE));
-
-        driver.get(MidnightConfigExample.toonationURL);
-        while (isAllowed) {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div[class='alert-layout animated fadeIn v-enter-to']")));
-            WebElement element = driver.findElement(By.xpath("/html/body/div/div[2]/div/div/div/div[2]/div[1]/div/span[4]"));
-            int donationAmount = Integer.parseInt(element.getText().replaceAll(",", ""));
-            ClientPlayNetworking.send(ModMessages.AMOUNT_ID, (PacketByteBuf) PacketByteBufs.create().writeByte(donationAmount));
-            wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div[class='alert-layout animated fadeIn v-enter-to']")));
+        if (MidnightConfigExample.toonationURL!=null) {
+            ChromeOptions options = new ChromeOptions();
+            options.setHeadless(true);
+            WebDriver driver = new ChromeDriver(options);
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(Integer.MAX_VALUE));
+            driver.get(MidnightConfigExample.toonationURL);
+            while (isAllowed) {
+                wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div[class='alert-layout animated fadeIn v-enter-to']")));
+                WebElement element = driver.findElement(By.xpath("/html/body/div/div[2]/div/div/div/div[2]/div[1]/div/span[4]"));
+                int donationAmount = Integer.parseInt(element.getText().replaceAll(",", ""));
+                LOGGER.info(String.valueOf(donationAmount));
+                ClientPlayNetworking.send(ModMessages.AMOUNT_ID, (PacketByteBuf) PacketByteBufs.create().writeByte(donationAmount));
+                wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div[class='alert-layout animated fadeIn v-enter-to']")));
+            }
         }
     }
     public void isWorked(boolean isCurrentAllow) {

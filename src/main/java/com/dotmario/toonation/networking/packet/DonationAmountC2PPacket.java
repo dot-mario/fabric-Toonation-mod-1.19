@@ -7,9 +7,8 @@ import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ServerWorld;
 
-import java.util.logging.Logger;
+import static com.dotmario.toonation.ToonationMod.LOGGER;
 
 public class DonationAmountC2PPacket {
     public static void receive(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler,
@@ -17,6 +16,6 @@ public class DonationAmountC2PPacket {
         // Everything here happens ONLY on the Server!
 //        EntityType.COW.spawn((ServerWorld) player.world, null, null, player, player.getBlockPos(),
 //                SpawnReason.TRIGGERED, true, false);
-        Logger.getLogger(buf.readString());
+        LOGGER.info(player.getEntityName()+" "+buf.readString());
     }
 }
