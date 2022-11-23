@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "id": "toonation",
+  "version": "${version}",
+
+  "name": "Toonation Mod",
+  "description": "This is a mode that detects the donation of Toonation!",
+  "authors": [
+    "dot mario"
+  ],
+  "contact": {
+    "homepage": "",
+    "sources": ""
+  },
+
+  "license": "CC0-1.0",
+  "icon": "assets/toonation/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.dotmario.toonation.ToonationMod"
+    ],
+    "modmenu": [
+      "com.dotmario.toonation.config.ModMenuIntegration"
+    ],
+    "client": [
+      "com.dotmario.toonation.ToonationModClient"
+    ],
+    "server": [
+      "com.dotmario.toonation.ToonationModServer"
+    ]
+  },
+  "mixins": [
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.14.9",
+    "fabric-api": "*",
+    "minecraft": "~1.19",
+    "java": ">=17"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
