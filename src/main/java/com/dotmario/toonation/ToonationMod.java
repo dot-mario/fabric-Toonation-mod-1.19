@@ -18,8 +18,6 @@ public class ToonationMod implements ModInitializer {
     public void onInitialize() {
         LOGGER.info("Hello Fabric world!");
         MidnightConfig.init(MOD_ID, MidnightConfigExample.class);
-        DonationCheck donationCheck = new DonationCheck(true);
-        donationCheck.start();
         ModMessages.registerC2SPackets();
     }
 }
