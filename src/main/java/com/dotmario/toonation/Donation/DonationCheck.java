@@ -6,9 +6,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.network.PacketByteBuf;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -21,6 +19,7 @@ import static com.dotmario.toonation.ToonationMod.LOGGER;
 
 public class DonationCheck extends Thread {
     private static boolean isAllowed;
+    private static ChromeDriver driver;
 
     public DonationCheck() {
         isAllowed = true;
@@ -32,7 +31,7 @@ public class DonationCheck extends Thread {
             ChromeOptions options = new ChromeOptions();
             options.setHeadless(true);
             options.addArguments("−−mute−audio");
-            ChromeDriver driver = new ChromeDriver(options);
+            driver = new ChromeDriver(options);
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(Integer.MAX_VALUE));
             driver.get(MidnightConfigExample.toonationURL);
             driver.findElement(By.xpath("/html/body")).click();
@@ -48,12 +47,12 @@ public class DonationCheck extends Thread {
 
                 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div[class='alert-layout animated fadeIn v-enter-to']")));
             }
-            LOGGER.info("quit selenium");
-            driver.quit();
         }
     }
     public static void stopSelenium() {
+        LOGGER.info("quit selenium");
         isAllowed = false;
+        driver.quit();
     }
     private void actionCheck(int amount) {
         if (amount==MidnightConfigExample.addInventory) {
