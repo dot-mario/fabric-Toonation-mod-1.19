@@ -5,6 +5,7 @@ import com.dotmario.toonation.networking.ModMessages;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.network.PacketByteBuf;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -19,10 +20,10 @@ import java.time.Duration;
 import static com.dotmario.toonation.ToonationMod.LOGGER;
 
 public class DonationCheck extends Thread {
-    private boolean isAllowed;
+    private static boolean isAllowed;
 
-    public DonationCheck(boolean isCurrentAllow) {
-        isAllowed = isCurrentAllow;
+    public DonationCheck() {
+        isAllowed = true;
         WebDriverManager.chromedriver().setup();
     }
     @Override
@@ -30,21 +31,29 @@ public class DonationCheck extends Thread {
         if (MidnightConfigExample.toonationURL!=null) {
             ChromeOptions options = new ChromeOptions();
             options.setHeadless(true);
-            WebDriver driver = new ChromeDriver(options);
+            options.addArguments("−−mute−audio");
+            ChromeDriver driver = new ChromeDriver(options);
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(Integer.MAX_VALUE));
             driver.get(MidnightConfigExample.toonationURL);
+            driver.findElement(By.xpath("/html/body")).click();
             while (isAllowed) {
                 wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div[class='alert-layout animated fadeIn v-enter-to']")));
                 WebElement element = driver.findElement(By.xpath("/html/body/div/div[2]/div/div/div/div[2]/div[1]/div/span[4]"));
                 int donationAmount = Integer.parseInt(element.getText().replaceAll(",", ""));
                 LOGGER.info(String.valueOf(donationAmount));
-                actionCheck(donationAmount);
+
+                if(MinecraftClient.getInstance().world != null && MinecraftClient.getInstance().world.isClient) {
+                    actionCheck(donationAmount);
+                }
+
                 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div[class='alert-layout animated fadeIn v-enter-to']")));
             }
+            LOGGER.info("quit selenium");
+            driver.quit();
         }
     }
-    public void isWorked(boolean isCurrentAllow) {
-        isAllowed = isCurrentAllow;
+    public static void stopSelenium() {
+        isAllowed = false;
     }
     private void actionCheck(int amount) {
         if (amount==MidnightConfigExample.addInventory) {

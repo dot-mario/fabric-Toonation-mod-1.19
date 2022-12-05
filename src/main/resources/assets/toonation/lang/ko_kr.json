@@ -1,11 +1,19 @@
 {
   "toonation.midnightconfig.title":"TOONATION SETTING",
 
+  "toonation.midnightconfig.setting":"금액 설정",
   "message.toonationmod.addInventory": "인벤토리 한칸 복구",
   "message.toonationmod.removeInventory": "인벤토리 한칸 제거",
   "message.toonationmod.removeItem": "아이템 제거",
   "message.toonationmod.addHP": "HP 한칸 추가",
   "message.toonationmod.removeHP": "HP 한칸 제거",
   "message.toonationmod.spawnCreeper": "크리퍼 소환",
-  "message.toonationmod.spawnTNT": "TNT 소환"
+  "message.toonationmod.spawnTNT": "TNT 소환",
+
+  "toonation.midnightconfig.blank1": "[이후는 민감한 정보가 있습니다]",
+  "toonation.midnightconfig.blank2": "!",
+  "toonation.midnightconfig.blank3": "!",
+  "toonation.midnightconfig.blank4": "!",
+  "toonation.midnightconfig.blank5": "!",
+  "toonation.midnightconfig.blank6": "!"
 }

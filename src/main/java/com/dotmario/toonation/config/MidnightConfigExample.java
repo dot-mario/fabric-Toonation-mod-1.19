@@ -13,7 +13,7 @@ public class MidnightConfigExample extends MidnightConfig {
 //    @Entry public static int fabric = 16777215;                 // Example for an int option
 //    @Entry public static double world = 1.4D;                   // Example for a double option
 //    @Entry public static boolean showInfo = true;               // Example for a boolean option
-    @Entry(name = "투네이션 알림 URL") public static String toonationURL = "";          // Example for a string option
+    @Comment(centered = true) public static Comment setting;
     @Entry(name = "인벤토리 아이템 하나 제거",min=0) public static int removeItem = 0;
     @Entry(name = "크리퍼 소환",min=0) public static int spawnCreeper = 0;
     @Entry(name = "TNT 소환",min=0) public static int spawnTNT = 0;
@@ -21,6 +21,13 @@ public class MidnightConfigExample extends MidnightConfig {
     @Entry(name = "인벤토리 한칸 복구",min=0) public static int addInventory = 0;
     @Entry(name = "HP 한칸 제거",min=0) public static int removeHP = 0;
     @Entry(name = "HP 한칸 추가",min=0) public static int addHP = 0;
+    @Comment(centered = true) public static Comment blank1;
+    @Comment(centered = true) public static Comment blank2;
+    @Comment(centered = true) public static Comment blank3;
+    @Comment(centered = true) public static Comment blank4;
+    @Comment(centered = true) public static Comment blank5;
+    @Comment(centered = true) public static Comment blank6;
+    @Entry(name = "투네이션 알림 URL") public static String toonationURL = "";
 //    @Entry public static TestEnum testEnum = TestEnum.FABRIC;   // Example for an enum option
 //    public enum TestEnum {                               // Enums allow the user to cycle through predefined options
 //        QUILT, FABRIC, FORGE

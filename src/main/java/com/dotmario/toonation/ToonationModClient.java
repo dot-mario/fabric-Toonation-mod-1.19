@@ -8,7 +8,7 @@ public class ToonationModClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         ModMessages.registerS2CPackets();
-        DonationCheck donationCheck = new DonationCheck(true);
+        DonationCheck donationCheck = new DonationCheck();
         donationCheck.start();
     }
 }

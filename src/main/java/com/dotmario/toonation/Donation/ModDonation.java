@@ -37,36 +37,32 @@ public class ModDonation {
     Random random = new Random();
     public ModDonation(ServerPlayerEntity player, String action) {
         switch (action) {
-            case "removeItem":
-                player.sendMessage(Text.of(RemoveItem(player)+" 제거!"));
-                break;
-            case "spawnCreeper":
+            case "removeItem" -> player.sendMessage(Text.of(RemoveItem(player) + " 제거!"));
+            case "spawnCreeper" -> {
                 player.sendMessage(Text.translatable(MESSAGE_TOONATION_ACTION_SPAWNCREEPER));
                 SpawnCreeper(player);
-                break;
-            case "spawnTNT":
+            }
+            case "spawnTNT" -> {
                 player.sendMessage(Text.translatable(MESSAGE_TOONATION_ACTION_SPAWNTNT));
                 SpawnTNT(player);
-                break;
-            case "removeInventory":
+            }
+            case "removeInventory" -> {
                 player.sendMessage(Text.translatable(MESSAGE_TOONATION_ACTION_REMOVEINVENTORY));
                 RemoveInventory(player);
-                break;
-            case "addInventory":
+            }
+            case "addInventory" -> {
                 player.sendMessage(Text.translatable(MESSAGE_TOONATION_ACTION_ADDINVENTORY));
                 AddInventory(player);
-                break;
-            case "removeHP":
+            }
+            case "removeHP" -> {
                 player.sendMessage(Text.translatable(MESSAGE_TOONATION_ACTION_REMOVEHP));
                 RemoveHP(player);
-                break;
-            case "addHP":
+            }
+            case "addHP" -> {
                 player.sendMessage(Text.translatable(MESSAGE_TOONATION_ACTION_ADDHP));
                 AddHP(player);
-                break;
-            default:
-                LOGGER.info("Action ERROR");
-                break;
+            }
+            default -> LOGGER.info("Action ERROR");
         }
     }
 
