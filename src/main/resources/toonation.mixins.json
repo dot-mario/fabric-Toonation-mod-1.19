@@ -4,10 +4,6 @@
   "package": "com.dotmario.toonation.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "ClientPlayerEntityMixin",
-    "PlayerEntityMixin",
-    "ScreenHandlerMixin",
-    "ServerPlayerEntityMixin"
   ],
   "client": [
     "MinecraftClientMixin"
