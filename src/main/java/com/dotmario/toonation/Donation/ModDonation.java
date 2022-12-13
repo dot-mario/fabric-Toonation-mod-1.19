@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.item.Item;
@@ -109,13 +110,15 @@ public class ModDonation {
         }
     }
     private void RemoveHP(ServerPlayerEntity player) {
-        player.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).
-                addPersistentModifier(new EntityAttributeModifier("thisnamedosentmatter", -2,
-                        EntityAttributeModifier.Operation.ADDITION));
+        EntityAttributeInstance entityAttributeInstance = player.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);
+        double NewHealth = entityAttributeInstance.getBaseValue() - 2;
+        entityAttributeInstance.setBaseValue(NewHealth);
+        player.setHealth((float) NewHealth);
     }
     private void AddHP(ServerPlayerEntity player) {
-        player.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).
-                addPersistentModifier(new EntityAttributeModifier("thisnamedosentmatter", 2,
-                        EntityAttributeModifier.Operation.ADDITION));
+        EntityAttributeInstance entityAttributeInstance = player.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);
+        double NewHealth = entityAttributeInstance.getBaseValue() + 2;
+        entityAttributeInstance.setBaseValue(NewHealth);
+        player.setHealth((float) NewHealth);
     }
 }

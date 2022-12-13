@@ -30,7 +30,7 @@ public class DonationCheck extends Thread {
         if (MidnightConfigExample.toonationURL!=null) {
             ChromeOptions options = new ChromeOptions();
             options.setHeadless(true);
-            options.addArguments("−−mute−audio");
+            options.addArguments("mute-audio");
             driver = new ChromeDriver(options);
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(Integer.MAX_VALUE));
             driver.get(MidnightConfigExample.toonationURL);
