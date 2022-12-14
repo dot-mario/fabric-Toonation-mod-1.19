@@ -27,25 +27,27 @@ public class DonationCheck extends Thread {
     }
     @Override
     public void run() {
-        if (MidnightConfigExample.toonationURL!=null) {
-            ChromeOptions options = new ChromeOptions();
-            options.setHeadless(true);
-            options.addArguments("mute-audio");
-            driver = new ChromeDriver(options);
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(Integer.MAX_VALUE));
-            driver.get(MidnightConfigExample.toonationURL);
-            driver.findElement(By.xpath("/html/body")).click();
-            while (isAllowed) {
-                wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div[class='alert-layout animated fadeIn v-enter-to']")));
-                WebElement element = driver.findElement(By.xpath("/html/body/div/div[2]/div/div/div/div[2]/div[1]/div/span[4]"));
-                int donationAmount = Integer.parseInt(element.getText().replaceAll(",", ""));
-                LOGGER.info(String.valueOf(donationAmount));
+        while (isAllowed) {
+            if (MidnightConfigExample.toonationURL!=null) {
+                ChromeOptions options = new ChromeOptions();
+                options.setHeadless(true);
+                options.addArguments("mute-audio");
+                driver = new ChromeDriver(options);
+                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(Integer.MAX_VALUE));
+                driver.get(MidnightConfigExample.toonationURL);
+                driver.findElement(By.xpath("/html/body")).click();
+                while (isAllowed) {
+                    wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div[class='alert-layout animated fadeIn v-enter-to']")));
+                    WebElement element = driver.findElement(By.xpath("/html/body/div/div[2]/div/div/div/div[2]/div[1]/div/span[4]"));
+                    int donationAmount = Integer.parseInt(element.getText().replaceAll(",", ""));
+                    LOGGER.info(String.valueOf(donationAmount));
 
-                if(MinecraftClient.getInstance().world != null && MinecraftClient.getInstance().world.isClient) {
-                    actionCheck(donationAmount);
+                    if(MinecraftClient.getInstance().world != null && MinecraftClient.getInstance().world.isClient) {
+                        actionCheck(donationAmount);
+                    }
+
+                    wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div[class='alert-layout animated fadeIn v-enter-to']")));
                 }
-
-                wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div[class='alert-layout animated fadeIn v-enter-to']")));
             }
         }
     }
@@ -55,27 +57,36 @@ public class DonationCheck extends Thread {
         driver.quit();
     }
     private void actionCheck(int amount) {
-        if (amount==MidnightConfigExample.addInventory) {
-            LOGGER.info("addInventory");
-            ClientPlayNetworking.send(ModMessages.AMOUNT_ID, PacketByteBufs.create().writeString("addInventory"));
-        } else if (amount==MidnightConfigExample.removeInventory) {
-            LOGGER.info("removeInventory");
-            ClientPlayNetworking.send(ModMessages.AMOUNT_ID, PacketByteBufs.create().writeString("removeInventory"));
-        } else if (amount==MidnightConfigExample.removeItem) {
+//        if (amount==MidnightConfigExample.addInventory) {
+//            LOGGER.info("addInventory");
+//            ClientPlayNetworking.send(ModMessages.AMOUNT_ID, PacketByteBufs.create().writeString("addInventory"));
+//        } else if (amount==MidnightConfigExample.removeInventory) {
+//            LOGGER.info("removeInventory");
+//            ClientPlayNetworking.send(ModMessages.AMOUNT_ID, PacketByteBufs.create().writeString("removeInventory"));
+//        }
+        if (amount==MidnightConfigExample.removeItem) {
             LOGGER.info("removeItem");
             ClientPlayNetworking.send(ModMessages.AMOUNT_ID, PacketByteBufs.create().writeString("removeItem"));
-        } else if (amount==MidnightConfigExample.addHP) {
+        }
+        if (amount==MidnightConfigExample.addHP) {
             LOGGER.info("addHP");
             ClientPlayNetworking.send(ModMessages.AMOUNT_ID, PacketByteBufs.create().writeString("addHP"));
-        } else if (amount==MidnightConfigExample.removeHP) {
+        }
+        if (amount==MidnightConfigExample.removeHP) {
             LOGGER.info("removeHP");
             ClientPlayNetworking.send(ModMessages.AMOUNT_ID, PacketByteBufs.create().writeString("removeHP"));
-        } else if (amount==MidnightConfigExample.spawnCreeper) {
+        }
+        if (amount==MidnightConfigExample.spawnCreeper) {
             LOGGER.info("spawnCreeper");
             ClientPlayNetworking.send(ModMessages.AMOUNT_ID, PacketByteBufs.create().writeString("spawnCreeper"));
-        } else if (amount==MidnightConfigExample.spawnTNT) {
+        }
+        if (amount==MidnightConfigExample.spawnTNT) {
             LOGGER.info("spawnTNT");
             ClientPlayNetworking.send(ModMessages.AMOUNT_ID, PacketByteBufs.create().writeString("spawnTNT"));
+        }
+        if (amount==MidnightConfigExample.spawnRandomMonster) {
+            LOGGER.info("spawnRandomMonster");
+            ClientPlayNetworking.send(ModMessages.AMOUNT_ID, PacketByteBufs.create().writeString("spawnRandomMonster"));
         }
     }
 }

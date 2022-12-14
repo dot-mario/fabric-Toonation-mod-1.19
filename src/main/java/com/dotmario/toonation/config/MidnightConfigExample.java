@@ -17,8 +17,9 @@ public class MidnightConfigExample extends MidnightConfig {
     @Entry(name = "인벤토리 아이템 하나 제거",min=0) public static int removeItem = 0;
     @Entry(name = "크리퍼 소환",min=0) public static int spawnCreeper = 0;
     @Entry(name = "TNT 소환",min=0) public static int spawnTNT = 0;
-    @Entry(name = "인벤토리 한칸 제거",min=0) public static int removeInventory = 0;
-    @Entry(name = "인벤토리 한칸 복구",min=0) public static int addInventory = 0;
+    @Entry(name = "랜덤 몬스터 소환",min=0) public static int spawnRandomMonster = 0;
+//    @Entry(name = "인벤토리 한칸 제거",min=0) public static int removeInventory = 0;
+//    @Entry(name = "인벤토리 한칸 복구",min=0) public static int addInventory = 0;
     @Entry(name = "HP 한칸 제거",min=0) public static int removeHP = 0;
     @Entry(name = "HP 한칸 추가",min=0) public static int addHP = 0;
     @Comment(centered = true) public static Comment blank1;

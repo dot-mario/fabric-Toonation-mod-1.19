@@ -9,6 +9,7 @@
   "message.toonationmod.removeHP": "HP 한칸 제거",
   "message.toonationmod.spawnCreeper": "크리퍼 소환",
   "message.toonationmod.spawnTNT": "TNT 소환",
+  "message.toonationmod.spawnRandomMonster": "랜덤 몬스터 소환",
 
   "toonation.midnightconfig.blank1": "[이후는 민감한 정보가 있습니다]",
   "toonation.midnightconfig.blank2": "!",

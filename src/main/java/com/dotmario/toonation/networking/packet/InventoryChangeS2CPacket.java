@@ -3,6 +3,7 @@ package com.dotmario.toonation.networking.packet;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
+import net.minecraft.client.resource.language.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.Text;
@@ -18,6 +19,6 @@ public class InventoryChangeS2CPacket {
         int amt = itemStack.getCount() - 1;
         itemStack.setCount(amt);
         client.player.getInventory().setStack(slot, amt > 0 ? itemStack : ItemStack.EMPTY);
-        LOGGER.info(client.player.getEntityName()+" slot:"+slot+" item:"+ Text.translatable(itemStack.getTranslationKey()));
+        LOGGER.info(client.player.getName()+" slot:"+slot+" item:"+ I18n.translate(itemStack.getTranslationKey()));
     }
 }

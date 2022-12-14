@@ -17,7 +17,6 @@ public class ToonationMod implements ModInitializer {
     @Override
     public void onInitialize() {
         LOGGER.info("Start Toonation Mod!");
-        MidnightConfig.init(MOD_ID, MidnightConfigExample.class);
         ModMessages.registerC2SPackets();
     }
 }
